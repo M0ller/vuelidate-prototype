@@ -10,10 +10,10 @@
     
   </div>
 
-<!--  <button-->
-<!--      @click="submitForm"-->
-<!--  >Submit-->
-<!--  </button>-->
+  <button
+      @click="submitForm"
+  >Submit
+  </button>
 </template>
 
 <script>
@@ -23,21 +23,27 @@ import {required} from '@vuelidate/validators'
 
 export default {
   
-  setup() {
+  data() {
     return {
-      v$: useVuelidate()
+      v$: useVuelidate(),
+      name: ''
     }
   },
-  data: () => ({
-    name: ''
-  }),
   validations() {
     return {
       name: {required}
     }
-  }
+  },
+  methods: {
+    submitForm() {
+      this.v$.$touch()
+      if (!this.v$.$error) {
+        alert('Form is valid.')
+      } else
+      alert('Form has errors.')
+    }
+  },
 }
-
 </script>
 <style scoped>
 
