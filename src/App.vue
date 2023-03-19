@@ -1,23 +1,56 @@
-<script setup>
-import { RouterLink, RouterView } from 'vue-router'
-</script>
-
 <template>
-  
-  <header>
+  <div class="login">
+    <h1>This is a login page</h1>
+  </div>
 
-    <div class="wrapper">
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
-      </nav>
-    </div>
-    
-  </header>
-  
-<RouterView />
-  
+  <div>
+    <input v-model="username">
+    <p v-if="v$.username.$error">Name field has an error.</p>
+  </div>
+  <div>
+    <input v-model="email">
+    <p v-if="v$.email.$error">Email field has an error.</p>
+  </div>
+
+  <button
+      @click="submitForm"
+  >Submit
+  </button>
 </template>
+<script>
+
+import {useVuelidate} from '@vuelidate/core'
+import {required} from '@vuelidate/validators'
+
+export default {
+  setup() {
+    return {
+      v$: useVuelidate(),
+    }
+  },
+  data() {
+    return {
+      username: '',
+      email: '',
+    }
+  },
+  validations() {
+    return {
+      username: {required},
+      email: {required},
+    }
+  },
+  methods: {
+    async submitForm() {
+      const isFormCorrect = await this.v$.$validate()
+      if (isFormCorrect) {
+        alert('Form is valid.')
+      } else
+      alert('Form has errors.')
+    }
+  },
+}
+</script>
 
 <style scoped>
 header {
