@@ -1,25 +1,27 @@
 # vue-project
 
-Template prototype
+### Template prototype 
 
-```using
+### using dependencies
+```
 @vuelidate/core
 @vuelidate/validators
 @vue/cli
 ```
 
-```start
+### Project setup
+```
 npm install
 ```
 
 ### Compile and Hot-Reload for Development
 
-```sh
+```
 npm run dev
 ```
 
 ### Compile and Minify for Production
 
-```sh
+```
 npm run build
 ```
