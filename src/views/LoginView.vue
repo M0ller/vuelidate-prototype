@@ -2,69 +2,95 @@
   <div class="login">
     <h1>This is a login page</h1>
   </div>
-  
+
   <div>
-    <BaseInput 
-        label="Username"
-        v-model="username" 
-        type="text"/>
-    <BaseInput 
-        label="Email"
-        v-model="email" 
-        type="text"/>
-    <BaseInput 
-        label="Password"
-        v-model="password" 
-        type="text"/>
-    <BaseInput 
-        label="Confirm Password"
-        v-model="confirmPassword" 
-        type="text"/>
+
+    <labe>
+      <input v-model="name">
+      <div v-if="v$.name.$error"> Name field has an error.</div>
+    </labe>
     
-<!--    <BaseInput -->
-<!--        label="First Name" -->
-<!--        v-model="firstName" -->
-<!--        type="text"/>-->
-<!--    <p>{{firstName}}</p>-->
+    <div>
+      <label>Username</label>
+      <br>
+      <input
+          v-model="username"
+      >
+    </div>
+    <div>
+      <label>Email</label>
+      <br>
+      <input
+          type="text"
+          v-model="email"
+      >
+    </div>
+    <div>
+      <label>Password</label>
+      <br>
+      <input
+          type="text"
+          v-model="password"
+      >
+    </div>
+    <div>
+      <label>Confirm Password</label>
+      <br>
+      <input
+          type="text"
+          v-model="confirmPassword"
+      >
+    </div>
   </div>
-  
+
   <button
       @click="submitForm"
-  >Submit</button>
+  >Submit
+  </button>
 </template>
 
-<script setup>
-import BaseInput from "@/components/BaseInput.vue"
-import {reactive} from 'vue'
-import {required} from "@vuelidate/validators";
+<script>
 import useVuelidate from "@vuelidate/core";
+import {required} from "@vuelidate/validators";
 
-// const firstName = ref('')
-const formData = reactive({
-  username: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-})
-
-const rules = {
-  username: { required },
-  email: { required },
-  password: { required },
-  confirmPassword: { required },
-}
-
-const v$ = useVuelidate(rules, formData)
-const submitForm = async () => {
-  const result = await v$.value.$validate()
-  if (result) {
-  alert("Success!")
-  }else{
-    alert("Error!")
+export default {
+  setup: ()=> ({ v$: useVuelidate() }),
+  // setup() {
+  //   return {
+  //     v$: useVuelidate()
+  //   }
+  // },
+  data() {
+    return {
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    }
+  },
+  validations() {
+    return {
+      name: {required},
+      username: {required},
+      email: {required},
+      password: {required},
+      confirmPassword: {required},
+    }
+  },
+  methods: {
+    submitForm: async () => {
+      const result = v$.$validate()
+      if (result) {
+        alert("Success!")
+      } else {
+        alert("Error!")
+      }
+    }
   }
 }
 
-</script >
+</script>
 <style scoped>
 
 </style>
