@@ -1,7 +1,7 @@
 <template>
   <div class="divide">
     <div class="login">
-    <h1>This is a login page</h1>
+    <h1>Login page</h1>
     
     <label for="username">Username</label>
     <input v-model="username" class="inputField">
