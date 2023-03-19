@@ -1,5 +1,6 @@
 <template>
-  <div class="login">
+  <div class="divide">
+    <div class="login">
     <h1>This is a login page</h1>
     
     <label for="username">Username</label>
@@ -16,6 +17,27 @@
     >Submit
     </button>
   </div>
+  <div class="login">
+    <h1>Vuelidate states:</h1>
+    <p>v$.username.$error: {{v$.username.$error}}</p>
+    <p>v$.username.$invalid: {{v$.username.$invalid}}</p>
+    <p>v$.username.$dirty: {{v$.username.$dirty}}</p>
+    
+    <br>
+    <p>v$.email.$error: {{v$.email.$error}}</p>
+    <p>v$.email.$invalid: {{v$.email.$invalid}}</p>
+    <p>v$.email.$dirty: {{v$.email.$dirty}}</p>
+    <br>
+    <button
+        class="inputField"
+        @click="resetDirty"
+    >Reset Dirty state
+    </button>
+  </div>
+  </div>
+  
+  
+  
 </template>
 
 <script>
@@ -47,6 +69,10 @@ export default {
         alert('Form is valid.')
       } else
         alert('Form has errors.')
+    },
+    async resetDirty() {
+      this.v$.username.$reset()
+      this.v$.email.$reset()
     }
   },
 }
@@ -62,6 +88,13 @@ export default {
 
 .inputField {
   width: 200px;
+  margin-bottom: 5px;
+}
+
+.divide {
+  display: flex;
+  flex-direction: row;
+  column-gap: 20px;
 }
 
 </style>
