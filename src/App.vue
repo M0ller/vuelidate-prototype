@@ -1,24 +1,24 @@
 <template>
   <div class="login">
     <h1>This is a login page</h1>
-  </div>
-
-  <div>
-    <input v-model="username">
+    
+    <label for="username">Username</label>
+    <input v-model="username" class="inputField">
     <p v-if="v$.username.$error">Name field has an error.</p>
-  </div>
-  <div>
-    <input v-model="email">
+
+    <label for="username">Email</label>
+    <input v-model="email" class="inputField">
     <p v-if="v$.email.$error">Email field has an error.</p>
+    
+    <button
+        class="inputField"
+        @click="submitForm"
+    >Submit
+    </button>
   </div>
-
-  <button
-      @click="submitForm"
-  >Submit
-  </button>
 </template>
-<script>
 
+<script>
 import {useVuelidate} from '@vuelidate/core'
 import {required} from '@vuelidate/validators'
 
@@ -46,72 +46,22 @@ export default {
       if (isFormCorrect) {
         alert('Form is valid.')
       } else
-      alert('Form has errors.')
+        alert('Form has errors.')
     }
   },
 }
 </script>
 
 <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+
+.login {
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.inputField {
+  width: 200px;
 }
 
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>
