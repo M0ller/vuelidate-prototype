@@ -24,6 +24,7 @@
     <p>v$.username.$dirty: {{v$.username.$dirty}}</p>
     
     <br>
+    <p>isEmailValid: {{isEmailValid}}</p>
     <p>v$.email.$error: {{v$.email.$error}}</p>
     <p>v$.email.$invalid: {{v$.email.$invalid}}</p>
     <p>v$.email.$dirty: {{v$.email.$dirty}}</p>
@@ -75,6 +76,13 @@ export default {
       this.v$.email.$reset()
     }
   },
+  computed: {
+    isEmailValid: {
+      get() {
+        return this.v$.email.$error
+      }
+    }
+  }
 }
 </script>
 
