@@ -6,7 +6,8 @@
     <label for="username">Username</label>
     <input v-model="username" class="inputField">
     <p v-if="v$.username.$error">Name field has an error.</p>
-
+      
+      <div style="height: 50px"/>
     <label for="username">Email</label>
     <input v-model="email" class="inputField">
     <p v-if="v$.email.$error">Email field has an error.</p>
@@ -22,8 +23,8 @@
     <p>v$.username.$error: {{v$.username.$error}}</p>
     <p>v$.username.$invalid: {{v$.username.$invalid}}</p>
     <p>v$.username.$dirty: {{v$.username.$dirty}}</p>
-    
-    <br>
+    <span>------------------------------------------</span>
+    <div style="height: 20px"/>
     <p>isEmailValid: {{isEmailValid}}</p>
     <p>v$.email.$error: {{v$.email.$error}}</p>
     <p>v$.email.$invalid: {{v$.email.$invalid}}</p>
@@ -65,7 +66,7 @@ export default {
   },
   methods: {
     async submitForm() {
-      const isFormCorrect = await this.v$.$validate()
+      const isFormCorrect = await this.v$.$validate() // this sets the $dirty state
       if (isFormCorrect) {
         alert('Form is valid.')
       } else
@@ -74,6 +75,7 @@ export default {
     async resetDirty() {
       this.v$.username.$reset()
       this.v$.email.$reset()
+      // or this.v$.$reset() // resets all validations
     }
   },
   computed: {
