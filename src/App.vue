@@ -43,7 +43,7 @@
 
 <script>
 import {useVuelidate} from '@vuelidate/core'
-import {required} from '@vuelidate/validators'
+import {email, required} from '@vuelidate/validators'
 
 export default {
   setup() {
@@ -60,7 +60,7 @@ export default {
   validations() {
     return {
       username: {required},
-      email: {required},
+      email: {required, email},
     }
   },
   methods: {
